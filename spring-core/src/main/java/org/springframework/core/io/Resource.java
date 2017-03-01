@@ -45,6 +45,7 @@ import java.net.URL;
  * @see InputStreamResource
  */
 public interface Resource extends InputStreamSource {
+	// TODO: 2017/3/1 MIKI_0 把XML用流的方式封装成File文件
 
 	/**
 	 * Determine whether this resource actually exists in physical form.

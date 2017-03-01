@@ -78,18 +78,22 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 	 */
 	@Override
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throws BeansException, IOException {
+		// TODO: 2017/3/1 MIKI_9 这个方法又是重中之重
 		// Create a new XmlBeanDefinitionReader for the given BeanFactory.
+		// TODO: 2017/3/1 MIKI_9_1 创建reader去解析resource
 		XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
 
 		// Configure the bean definition reader with this context's
 		// resource loading environment.
 		beanDefinitionReader.setEnvironment(this.getEnvironment());
+		// TODO: 2017/3/1 MIKI_9_1 把ApplicationContext放进去了,beanDefinitionReader就能拿到资源了,就能解析XML文件了 这方法很重要
 		beanDefinitionReader.setResourceLoader(this);
 		beanDefinitionReader.setEntityResolver(new ResourceEntityResolver(this));
 
 		// Allow a subclass to provide custom initialization of the reader,
 		// then proceed with actually loading the bean definitions.
 		initBeanDefinitionReader(beanDefinitionReader);
+		// TODO: 2017/3/1 MIKI_9_2
 		loadBeanDefinitions(beanDefinitionReader);
 	}
 
@@ -118,6 +122,7 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 	 * @see #getResourcePatternResolver
 	 */
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansException, IOException {
+		// TODO: 2017/3/1 MIKI_10 getConfigResources就是拿到servlet上下文后,就能拿到web.xml中的参数,并把该文件封装成Resource
 		Resource[] configResources = getConfigResources();
 		if (configResources != null) {
 			reader.loadBeanDefinitions(configResources);

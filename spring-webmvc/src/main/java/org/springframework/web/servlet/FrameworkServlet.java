@@ -486,7 +486,9 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		long startTime = System.currentTimeMillis();
 
 		try {
+			// TODO: 2017/3/1 MIKI 入口方法 真正初始化上下文的方法
 			this.webApplicationContext = initWebApplicationContext();
+			// TODO: 2017/3/1 空方法,留后路,以后扩展
 			initFrameworkServlet();
 		}
 		catch (ServletException ex) {
@@ -515,6 +517,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 	 * @see #setContextConfigLocation
 	 */
 	protected WebApplicationContext initWebApplicationContext() {
+		// TODO: 2017/3/1 MIKI_5 initWebApplicationContext 初始化Spring上下文
 		WebApplicationContext rootContext =
 				WebApplicationContextUtils.getWebApplicationContext(getServletContext());
 		WebApplicationContext wac = null;
@@ -532,6 +535,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 						// the root application context (if any; may be null) as the parent
 						cwac.setParent(rootContext);
 					}
+					// TODO: 2017/3/1 MIKI_5 最主要的一个方法
 					configureAndRefreshWebApplicationContext(cwac);
 				}
 			}
@@ -653,6 +657,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 		// The wac environment's #initPropertySources will be called in any case when the context
 		// is refreshed; do it eagerly here to ensure servlet property sources are in place for
 		// use in any post-processing or initialization that occurs below prior to #refresh
+		// TODO: 2017/3/1 环境什么意思,指的是Spring中的开发环境和测试环境 有不同的配置
 		ConfigurableEnvironment env = wac.getEnvironment();
 		if (env instanceof ConfigurableWebEnvironment) {
 			((ConfigurableWebEnvironment) env).initPropertySources(getServletContext(), getServletConfig());
@@ -660,6 +665,7 @@ public abstract class FrameworkServlet extends HttpServletBean implements Applic
 
 		postProcessWebApplicationContext(wac);
 		applyInitializers(wac);
+		// TODO: 2017/3/1 MIKI_7 最主要的方法  必须要去看的方法 可以理解为Spring的启动/上下文的初始化
 		wac.refresh();
 	}
 

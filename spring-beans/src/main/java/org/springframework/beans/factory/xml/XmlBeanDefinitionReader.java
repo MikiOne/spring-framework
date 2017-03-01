@@ -301,6 +301,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 */
 	@Override
 	public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
+		// TODO: 2017/3/1 MIKI_10 Resource 封装成 EncodedResource
 		return loadBeanDefinitions(new EncodedResource(resource));
 	}
 
@@ -317,6 +318,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			logger.info("Loading XML bean definitions from " + encodedResource.getResource());
 		}
 
+		// TODO: 2017/3/1 MIKI_11 缓存,当前线程做key
 		Set<EncodedResource> currentResources = this.resourcesCurrentlyBeingLoaded.get();
 		if (currentResources == null) {
 			currentResources = new HashSet<>(4);
@@ -327,12 +329,15 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
 		}
 		try {
+			// TODO: 2017/3/1 MIKI_11_1 拿到流
 			InputStream inputStream = encodedResource.getResource().getInputStream();
 			try {
+				// TODO: 2017/3/1 MIKI_11_1 InputSource 是用于dom解析的
 				InputSource inputSource = new InputSource(inputStream);
 				if (encodedResource.getEncoding() != null) {
 					inputSource.setEncoding(encodedResource.getEncoding());
 				}
+				// TODO: 2017/3/1 MIKI_12 这个方法很重要
 				return doLoadBeanDefinitions(inputSource, encodedResource.getResource());
 			}
 			finally {
@@ -388,6 +393,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	protected int doLoadBeanDefinitions(InputSource inputSource, Resource resource)
 			throws BeanDefinitionStoreException {
 		try {
+			// TODO: 2017/3/1 MIKI_12_1
 			Document doc = doLoadDocument(inputSource, resource);
 			return registerBeanDefinitions(doc, resource);
 		}
@@ -426,6 +432,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 	 * @see DocumentLoader#loadDocument
 	 */
 	protected Document doLoadDocument(InputSource inputSource, Resource resource) throws Exception {
+		// TODO: 2017/3/1 MIKI_13 这个方法很重要
 		return this.documentLoader.loadDocument(inputSource, getEntityResolver(), this.errorHandler,
 				getValidationModeForResource(resource), isNamespaceAware());
 	}

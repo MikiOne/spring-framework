@@ -56,6 +56,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
  */
 public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,
 		MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
+	// TODO: 2017/3/1 MIKI ResourcePatternResolver 负责加载解析和封装
+	// TODO: 2017/3/1 MIKI_0 ApplicationContext 中有 ResourceLoader 和 BeanFactory两个对象,非常重要,一定要记清
 
 	/**
 	 * Return the unique id of this application context.

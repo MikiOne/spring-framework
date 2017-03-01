@@ -38,6 +38,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @see org.springframework.web.servlet.FrameworkServlet#createWebApplicationContext
  */
 public interface ConfigurableWebApplicationContext extends WebApplicationContext, ConfigurableApplicationContext {
+	// TODO: 2017/3/1 MIKI_6 ConfigurableWebApplicationContext 继承 ApplicationContext Spring内部使用的
 
 	/**
 	 * Prefix for ApplicationContext ids that refer to context path and/or servlet name.

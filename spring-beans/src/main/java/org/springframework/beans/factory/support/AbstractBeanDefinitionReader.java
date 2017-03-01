@@ -175,9 +175,11 @@ public abstract class AbstractBeanDefinitionReader implements EnvironmentCapable
 
 	@Override
 	public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
+		// TODO: 2017/3/1 MIKI_10
 		Assert.notNull(resources, "Resource array must not be null");
 		int counter = 0;
 		for (Resource resource : resources) {
+			// TODO: 2017/3/1 MIKI_10
 			counter += loadBeanDefinitions(resource);
 		}
 		return counter;

@@ -122,6 +122,7 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.context.MessageSource
  */
+// TODO: 2017/3/1 MIKI 继承了默认的资源加载器
 public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		implements ConfigurableApplicationContext, DisposableBean {
 
@@ -505,11 +506,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 	@Override
 	public void refresh() throws BeansException, IllegalStateException {
+		// TODO: 2017/3/1 MIKI_7 其中两个方法是比较重要的
 		synchronized (this.startupShutdownMonitor) {
 			// Prepare this context for refreshing.
 			prepareRefresh();
 
 			// Tell the subclass to refresh the internal bean factory.
+			// TODO: 2017/3/1 MIKI_8 初始化XML文件到注册整个过程
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
 
 			// Prepare the bean factory for use in this context.
@@ -609,6 +612,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+		// TODO: 2017/3/1 MIKI_8
 		refreshBeanFactory();
 		ConfigurableListableBeanFactory beanFactory = getBeanFactory();
 		if (logger.isDebugEnabled()) {

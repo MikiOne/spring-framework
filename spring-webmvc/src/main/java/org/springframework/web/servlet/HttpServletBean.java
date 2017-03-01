@@ -114,6 +114,7 @@ public abstract class HttpServletBean extends HttpServlet
 	 */
 	@Override
 	public final void init() throws ServletException {
+		// TODO: 2017/2/28 MIKI_0 spring的真正的入口
 		if (logger.isDebugEnabled()) {
 			logger.debug("Initializing servlet '" + getServletName() + "'");
 		}
@@ -122,6 +123,8 @@ public abstract class HttpServletBean extends HttpServlet
 		try {
 			PropertyValues pvs = new ServletConfigPropertyValues(getServletConfig(), this.requiredProperties);
 			BeanWrapper bw = PropertyAccessorFactory.forBeanPropertyAccess(this);
+			// TODO: 2017/3/1 MIKI_3 ServletContextResourceLoader ResourceLoader 实现类
+			// TODO: 2017/3/1 getServletContext()获取servlet的上下文
 			ResourceLoader resourceLoader = new ServletContextResourceLoader(getServletContext());
 			bw.registerCustomEditor(Resource.class, new ResourceEditor(resourceLoader, getEnvironment()));
 			initBeanWrapper(bw);
@@ -133,6 +136,7 @@ public abstract class HttpServletBean extends HttpServlet
 		}
 
 		// Let subclasses do whatever initialization they like.
+		// TODO: 2017/3/1 MIKI_4 入口方法,调用了FrameworkServlet.initServletBean()
 		initServletBean();
 
 		if (logger.isDebugEnabled()) {

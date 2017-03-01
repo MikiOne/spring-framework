@@ -39,7 +39,8 @@ import org.springframework.util.ResourceUtils;
  * @see org.springframework.context.ResourceLoaderAware
  */
 public interface ResourceLoader {
-
+	// TODO: 2017/2/28 MIKI_2 ResourceLoader里面有些什么东西?
+	// TODO: 有 Resource 和 ClassLoader
 	/** Pseudo URL prefix for loading from the class path: "classpath:" */
 	String CLASSPATH_URL_PREFIX = ResourceUtils.CLASSPATH_URL_PREFIX;
 
@@ -64,6 +65,7 @@ public interface ResourceLoader {
 	 * @see org.springframework.core.io.Resource#getInputStream
 	 */
 	Resource getResource(String location);
+	// TODO: 2017/2/28 把xml/properties文件分装成Resource对象
 
 	/**
 	 * Expose the ClassLoader used by this ResourceLoader.
@@ -75,5 +77,6 @@ public interface ResourceLoader {
 	 * @see org.springframework.util.ClassUtils#getDefaultClassLoader()
 	 */
 	ClassLoader getClassLoader();
+	// TODO: 2017/3/1  ClassLoader负责加载配置文件
 
 }
